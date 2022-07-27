@@ -1,17 +1,16 @@
 package view;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 import javax.swing.JPanel;
+
+import model.Piece;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel {
 	private int cellDim;
 	private int[][] moves;
+	private Piece[][] board;
 
 	public GamePanel(int dim) {
 		this.setPreferredSize(new Dimension(dim, dim));
@@ -20,8 +19,9 @@ public class GamePanel extends JPanel {
 		cellDim = dim / 8;
 	}
 
-	public void refresh(int[][] moves) {
+	public void refresh(int[][] moves, Piece[][] board) {
 		this.moves = moves;
+		this.board = board;
 		this.repaint();
 	}
 
@@ -47,9 +47,18 @@ public class GamePanel extends JPanel {
 			g.drawRect(i % 8 * cellDim, i / 8 * cellDim, cellDim, cellDim);
 		}
 
-		// TODO: drawing the pieces
+		// drawing the pieces
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Piece piece = board[i][j];
+				if (piece != null) {
+					// System.out.println(i + " " + j);
+					g2.drawImage(piece.getIcon().getImage(), j * cellDim, i *cellDim, cellDim, cellDim, null);
+				}
+			}
+		}
 
-		// TODO: drawing the moves
+		// drawing the moves
 		int circleDim = 0;
 		Color circleColor = Color.black;
 

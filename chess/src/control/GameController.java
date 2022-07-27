@@ -29,7 +29,7 @@ public class GameController implements Runnable, MouseListener {
 
 		while (true) {
 			// refresh
-			view.getGamePanel().refresh(model.getMoves());
+			view.getGamePanel().refresh(model.getMoves(), model.getBoard());
 
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleep = 32 - timeDiff;
