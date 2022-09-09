@@ -48,45 +48,51 @@ public class GamePanel extends JPanel {
 		}
 
 		// drawing the pieces
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Piece piece = board[i][j];
-				if (piece != null) {
-					// System.out.println(i + " " + j);
-					g2.drawImage(piece.getIcon().getImage(), j * cellDim, i *cellDim, cellDim, cellDim, null);
+		if (board != null)
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					Piece piece = board[i][j];
+					if (piece != null) {
+						g2.drawImage(piece.getIcon().getImage(), j * cellDim, i * cellDim, cellDim, cellDim, null);
+					}
 				}
 			}
-		}
 
 		// drawing the moves
 		int circleDim = 0;
 		Color circleColor = Color.black;
 
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				// simple move
-				if (moves[i][j] == 1) {
-					circleDim = cellDim / 5;
-					circleColor = Color.blue;
-				}
+		if (moves != null)
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					// simple move
+					if (moves[i][j] == 1) {
+						circleDim = cellDim / 5;
+						circleColor = Color.blue;
+					}
 
-				// can take
-				else if (moves[i][j] == 2) {
-					circleDim = cellDim / 4;
-					circleColor = new Color(153, 0, 153);
-				}
+					// can take
+					else if (moves[i][j] == 2) {
+						circleDim = cellDim / 4;
+						circleColor = Color.red;
+					}
+					
+					else if (moves[i][j] == 3) {
+						circleDim = cellDim / 3;
+						circleColor = Color.green;
+					}
 
-				// there is no move
-				else
-					circleDim = 0;
+					// there is no move
+					else
+						circleDim = 0;
 
-				if (circleDim > 0) {
-					g.setColor(circleColor);
-					g.fillOval(j * cellDim + cellDim / 2 - circleDim / 2, i * cellDim + cellDim / 2 - circleDim / 2,
-							circleDim, circleDim);
+					if (circleDim > 0) {
+						g.setColor(circleColor);
+						g.fillOval(j * cellDim + cellDim / 2 - circleDim / 2, i * cellDim + cellDim / 2 - circleDim / 2,
+								circleDim, circleDim);
+					}
 				}
 			}
-		}
 	}
 
 	public int getCellDim() {

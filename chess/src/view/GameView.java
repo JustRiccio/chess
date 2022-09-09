@@ -1,5 +1,8 @@
 package view;
 
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
@@ -13,6 +16,12 @@ public class GameView extends JFrame {
 
 		gamePanel = new GamePanel(dim);
 		this.add(gamePanel);
+		
+		try {
+			this.setIconImage(ImageIO.read(getClass().getResourceAsStream("/icon.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		this.pack();
 		this.setLocationRelativeTo(null);
